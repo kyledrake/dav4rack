@@ -1,7 +1,7 @@
 #!/bin/sh 
 
 # Run buitin spec tests
-bundle exec rake test
+bundle exec rspec
 
 if [ $? -ne 0 ] ; then
   echo "*** Specs failed to properly complete"
@@ -23,16 +23,16 @@ sleep 3
 
 DAV_PID=$?
 
-if [ ! -f /tmp/litmus/litmus-0.13.tar.gz ]; then
+if [ ! -f /tmp/litmus/litmus-0.14.tar.gz ]; then
   mkdir -p /tmp/litmus
-  wget -O /tmp/litmus/litmus-0.13.tar.gz http://www.webdav.org/neon/litmus/litmus-0.13.tar.gz
   cd /tmp/litmus
-  tar -xzf litmus-0.13.tar.gz
-  cd /tmp/litmus/litmus-0.13
+  curl -O https://notroj.github.io/litmus/litmus-0.14.tar.gz
+  tar -xzf litmus-0.14.tar.gz
+  cd /tmp/litmus/litmus-0.14
   ./configure
 fi
 
-cd /tmp/litmus/litmus-0.13 
+cd /tmp/litmus/litmus-0.14
 make URL=http://localhost:3000/ check
 
 LITMUS=$?

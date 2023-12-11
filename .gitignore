@@ -1,7 +1,17 @@
-.*
-!.gitignore
-*.gem
-*~
-doc/*
-pkg/*
-test/repo
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/lib/*.bundle
+
+# rspec failure tracking
+.rspec_status
+
+# use dav4rack.gemspec instead
+Gemfile.lock
+
+.tool-versions

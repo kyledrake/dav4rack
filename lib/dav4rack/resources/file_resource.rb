@@ -74,7 +74,7 @@ module DAV4Rack
         end
         response['Content-Length'] = response.body.bytesize.to_s
       else
-        file = Rack::File.new(root)
+        file = Rack::Files.new(root)
         response.body = file
       end
       OK
@@ -104,7 +104,7 @@ module DAV4Rack
       else
         ::File.unlink(file_path)
       end
-      ::File.unlink(prop_path) if ::File.exists?(prop_path)
+      ::File.unlink(prop_path) if ::File.exist?(prop_path)
       @_prop_hash = nil
       NoContent
     end
@@ -168,7 +168,7 @@ module DAV4Rack
         if(::File.directory?(file_path))
           MethodNotAllowed
         else
-          if(::File.directory?(::File.dirname(file_path)) && !::File.exists?(file_path))
+          if(::File.directory?(::File.dirname(file_path)) && !::File.exist?(file_path))
             Dir.mkdir(file_path)
             Created
           else

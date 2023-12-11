@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 module DAV4Rack
   
@@ -8,6 +8,8 @@ module DAV4Rack
     
     attr_reader :request, :response, :resource
 
+    @@uri = URI::RFC2396_Parser.new
+      
     # request:: Rack::Request
     # response:: Rack::Response
     # options:: Options hash
@@ -32,7 +34,7 @@ module DAV4Rack
     # s:: string
     # Escape URL string
     def url_format(resource)
-      ret = URI.escape(resource.public_path)
+      ret = @@uri.escape(resource.public_path)
       if resource.collection? and ret[-1,1] != '/'
         ret += '/'
       end
@@ -42,7 +44,7 @@ module DAV4Rack
     # s:: string
     # Unescape URL string
     def url_unescape(s)
-      URI.unescape(s)
+      @@uri.unescape(s)
     end
     
     def add_dav_header
@@ -494,7 +496,7 @@ module DAV4Rack
     def response_errors(xml, errors)
       for path, status in errors
         xml.response do
-          xml.href "#{scheme}://#{host}:#{port}#{URI.escape(path)}"
+          xml.href "#{scheme}://#{host}:#{port}#{@@uri.escape(path)}"
           xml.status "#{http_version} #{status.status_line}"
         end
       end

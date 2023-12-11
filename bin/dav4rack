@@ -44,7 +44,7 @@ opts.each do |opt,arg|
     credentials[:password] = arg
   when '--root'
     credentials[:root] = arg
-    unless(File.exists?(arg) && File.directory?(arg))
+    unless(File.exist?(arg) && File.directory?(arg))
       puts "ERROR: Path provided is not a valid directory (#{arg})"
       exit(-1)
     end
@@ -59,7 +59,7 @@ opts.each do |opt,arg|
     credentials[:log_to] = [nil, Logger::FATAL] unless credentials[:log_to]
     if(arg && !arg.empty?)
       dirname = Pathname.new(arg).dirname
-      if((File.exists?(arg) && File.writable?(arg)) || (File.exists?(dirname) && File.writable?(dirname)))
+      if((File.exist?(arg) && File.writable?(arg)) || (File.exist?(dirname) && File.writable?(dirname)))
         credentials[:log_to][0] = arg
       else
         puts "ERROR: Log file is not writable: #{arg}"
