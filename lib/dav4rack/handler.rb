@@ -38,8 +38,8 @@ module DAV4Rack
         end
 
         # Apache wants the body dealt with, so just read it and junk it
-        buf = true
-        buf = request.body.read(8192) while buf
+        #buf = true
+        #buf = request.body.read(8192) while buf
 
         if response.body.is_a?(Rack::Files)
           return response.body.call(env)

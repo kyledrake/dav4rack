@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'nokogiri', '>= 1.4.2'
   s.add_runtime_dependency 'uuidtools', '~> 2.1.1'
-  s.add_runtime_dependency 'rack', '~> 2.0'
+  s.add_runtime_dependency 'rack', '~> 3.0'
   s.add_runtime_dependency 'webrick'
 
   s.add_development_dependency("rspec", "~> 3.0")

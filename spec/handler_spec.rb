@@ -17,13 +17,14 @@ RSpec.describe DAV4Rack::Handler do
   
   attr_reader :response
   
-  def request(method, uri, options={})
+  def request(method, uri, options = {})
     options = {
       'HTTP_HOST' => 'localhost',
-      'REMOTE_USER' => 'user'
+      'rack.input' => StringIO.new(options.delete(:input) || ''), # Ensure a proper request body
     }.merge(options)
+
     request = Rack::MockRequest.new(@controller)
-    @response = request.request(method, uri, options)
+    @response = request.request(method, uri, **options)
   end
 
   METHODS.each do |method|
